@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #333;
+        }
+        div {
+            
+            padding: 15px;
+            margin: 10px ;
+            border-radius: 40px;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+        }
+        span {
+            font-size: 8rem;
+            line-height: 11rem;
+        }
+
+        button {
+            border-radius: 15%;
+            background-color: #333;
+            border: 1px goldenrod solid;
+            margin: 10px;
+        }
+
+        button:hover {
+            background-color: #999;
+            transition: 0.3s;
+        }
+        h1 { 
+            color: #f0f0f0;
+        }
+        footer {
+            
+        }
+    </style>
+    <title>Piedra papel o tijeras! 🪨📄✂️</title>
+</head>
+<body>
+    <header>
+        <h1>PIEDRA🪨 PAPEL📄 O TIJERAS✂️</h1>
+        <h2> {{ msj }}</h2>
+    </header>
+
+    <div id="stats">
+        <p>Ganadas: {{ ganadas }}</p>
+        <p>Perdidas: {{ perdidas }}</p>
+        <p>Empates: {{ empates }}</p>
+    </div>
+    <div id="juego">
+        {% if not juego_terminado %}
+            <form action="POST">
+                <button type="submit"><span>🪨</span></button>
+                <button type="submit"><span>📄</span></button>
+                <button type="submit"><span>✂️</span></button>
+            </form>
+        {% endif %}
+        <br>
+        <a href="/reset">Reiniciar</a>
+    </div>
+    <footer>
+        <center><h3>Proyecto para FTI - Bertero, Garcia - UNPSJB</h3></center>
+    </footer>
+</body>
+</html>
