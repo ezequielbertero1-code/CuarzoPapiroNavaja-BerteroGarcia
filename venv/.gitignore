@@ -1,1 +1,33 @@
 # Created by venv; see https://docs.python.org/3/library/venv.html
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+dist/
+build/
+.venv/
+venv/
+.env
+.env.*
+*.sqlite3
+instance/
+
+# Flask caches
+.flaskenv
+.pytest_cache/
+.coverage
+htmlcov/
+
+# VSCode
+.vscode/
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.log
+

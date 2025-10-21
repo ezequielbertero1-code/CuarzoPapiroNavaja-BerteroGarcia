@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  web:
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "5000:5000"
+    # Modo DEV (autoreload) — activar con: `docker compose --profile dev up`
+    command: >
+      sh -c "python -m flask --app app run --host=0.0.0.0 --port=5000 --debug"
+    volumes:
+      - .:/app
+    profiles: ["dev"]
+
+  web-prod:
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "5000:5000"
+    # Modo PROD con gunicorn — activar con: `docker compose --profile prod up`
+    command: >
+      sh -c "gunicorn -b 0.0.0.0:5000 --workers 2 --threads 4 app:app"
+    profiles: ["prod"]

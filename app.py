@@ -1,0 +1,61 @@
+from flask import Flask, render_template, request, session, redirect, url_for
+import os , secrets  # para elegir aleatorio de forma segura
+
+app = Flask(__name__)
+# Mejor tomarla de variable de entorno; si no existe, usa un fallback (solo local)
+app.secret_key = secrets.token_hex(16)
+
+OPCIONES = ("piedra", "papel", "tijera")
+REGLAS = {
+    ("piedra", "tijera"): "ganaste",
+    ("tijera", "papel"): "ganaste",
+    ("papel", "piedra"): "ganaste",
+}
+
+def init_sesion():
+    session.setdefault("jugando", True)
+    session.setdefault("ganadas", 0)
+    session.setdefault("perdidas", 0)
+    session.setdefault("empates", 0)
+    session.setdefault("msj", "Jugá al famoso Piedra, Papel o Tijera.")
+
+@app.route("/", methods=["GET", "POST"])
+def juego():
+    init_sesion()
+
+    if request.method == "POST":
+        eleccion = request.form.get("eleccion", "").lower()
+        if eleccion not in OPCIONES:
+            session["msj"] = "Elección inválida. Probá con piedra, papel o tijera."
+            return redirect(url_for("juego"))
+
+        comp = secrets.choice(OPCIONES)
+
+        if eleccion == comp:
+            session["empates"] += 1
+            resultado = "empate"
+        elif (eleccion, comp) in REGLAS:
+            session["ganadas"] += 1
+            resultado = "ganaste"
+        else:
+            session["perdidas"] += 1
+            resultado = "perdiste"
+
+        session["msj"] = f"Elegiste {eleccion} y la compu {comp}: {resultado}."
+
+    return render_template(
+        "index.html",
+        msj=session["msj"],
+        ganadas=session["ganadas"],
+        perdidas=session["perdidas"],
+        empates=session["empates"],
+        juego_terminado=session.get("juego_terminado", False),
+    )
+
+@app.route("/reset")
+def reset():
+    session.clear()
+    return redirect(url_for("juego"))
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", debug=True, port=5000)

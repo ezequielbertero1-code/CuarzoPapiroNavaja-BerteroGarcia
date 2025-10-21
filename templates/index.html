@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Piedra • Papel • Tijera 🪨📄✂️</title>
+  <style>
+    :root { color-scheme: dark; }
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 2rem 1rem 3rem;
+      background-color: #333;
+      color: #f0f0f0;
+    }
+    header { margin-bottom: 1rem; }
+    h1 { margin: 0 0 .25rem; }
+    h2 { margin: .25rem 0 1rem; font-weight: 500; }
+    #stats, .msg {
+      max-width: 680px; margin: 0 auto 1rem; padding: .75rem 1rem;
+      background: #3b3b3b; border: 1px solid #4a4a4a; border-radius: 14px;
+    }
+    #stats p { margin: .25rem 0; }
+    form {
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem; max-width: 680px; margin: 1rem auto;
+    }
+    button {
+      cursor: pointer;
+      border-radius: 18px;
+      background-color: #333;
+      color: inherit;
+      border: 1px solid goldenrod;
+      padding: .75rem 1rem;
+      transition: background-color .2s ease, transform .05s ease;
+    }
+    button:hover { background-color: #555; }
+    button:active { transform: translateY(1px); }
+    button span { display: block; font-size: 4.5rem; line-height: 1; }
+    a { color: gold; }
+    footer { margin-top: 2rem; opacity: .8; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>PIEDRA 🪨 • PAPEL 📄 • TIJERA ✂️</h1>
+    <div class="msg">{{ msj }}</div>
+  </header>
+
+  <div id="stats">
+    <p>✅ Ganadas: <strong>{{ ganadas }}</strong></p>
+    <p>❌ Perdidas: <strong>{{ perdidas }}</strong></p>
+    <p>➖ Empates: <strong>{{ empates }}</strong></p>
+  </div>
+
+  <div id="juego">
+    {% if not juego_terminado %}
+      <!-- OJO: method y action correctos -->
+      <form method="POST" action="/">
+        <button type="submit" name="eleccion" value="piedra" aria-label="Elegir piedra">
+          <span>🪨</span>
+          Piedra
+        </button>
+        <button type="submit" name="eleccion" value="papel" aria-label="Elegir papel">
+          <span>📄</span>
+          Papel
+        </button>
+        <button type="submit" name="eleccion" value="tijera" aria-label="Elegir tijera">
+          <span>✂️</span>
+          Tijera
+        </button>
+      </form>
+    {% endif %}
+
+    <p><a href="{{ url_for('reset') }}">Reiniciar</a></p>
+  </div>
+
+  <footer>
+    <h3>Proyecto para FTI — Bertero · García — UNPSJB</h3>
+  </footer>
+</body>
+</html>
