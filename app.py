@@ -22,11 +22,11 @@ dfa = DFA(
                 final_states={'q4', 'q5', 'q6'}
             )
 
-OPCIONES = ("piedra", "papel", "tijera")
-REGLAS = {
-    ("piedra", "tijera"): "ganaste",
-    ("tijera", "papel"): "ganaste",
-    ("papel", "piedra"): "ganaste",
+OPCIONES = ("C", "P", "N")
+EMOJIS = {
+    'C': 'Cuarzo 🪨',
+    'N': 'Navaja ✂️',
+    'P': 'Papiro 📄',
 }
 
 def init_sesion():
@@ -40,25 +40,25 @@ def init_sesion():
 def juego():
     init_sesion()
     if request.method == "POST":
-        eleccion = request.form.get("eleccion", "").lower()
+        eleccion = request.form.get("eleccion", "")
         if eleccion not in OPCIONES:
             session["msj"] = "Elección inválida. Probá con piedra, papel o tijera."
             return redirect(url_for("juego"))
 
         comp = secrets.choice(OPCIONES)
         
-        if eleccion == comp:
+        if dfa.read_input(eleccion+comp) == 'q6':
             session["empates"] += 1
-            resultado = "empate"
+            resultado = "Empate"
             
-        elif (eleccion, comp) in REGLAS:
+        elif dfa.read_input(eleccion+comp) == 'q4':
             session["ganadas"] += 1
-            resultado = "ganaste"
+            resultado = "Ganaste!"
         else:
             session["perdidas"] += 1
-            resultado = "perdiste"
+            resultado = "Perdiste!"
 
-        session["msj"] = f"Elegiste {eleccion} y la compu {comp}: {resultado}."
+        session["msj"] = f"Elegiste {EMOJIS[eleccion]} y la compu {EMOJIS[comp]}: {resultado}."
 
         
     return render_template(
