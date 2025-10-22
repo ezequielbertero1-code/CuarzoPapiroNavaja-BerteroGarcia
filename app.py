@@ -6,6 +6,22 @@ app = Flask(__name__)
 # Mejor tomarla de variable de entorno; si no existe, usa un fallback (solo local)
 app.secret_key = secrets.token_hex(16)
 
+dfa = DFA(
+                states={'q0', 'q1', 'q2', 'q3', 'q4', 'q5', 'q6'},
+                input_symbols={'C', 'P', 'N'},
+                transitions={
+                    'q0': {'C': 'q1', 'P': 'q2', 'N': 'q3'},
+                    'q1': {'C': 'q6', 'P': 'q5', 'N': 'q4'},
+                    'q2': {'C': 'q4', 'P': 'q6', 'N': 'q5'},
+                    'q3': {'C': 'q5', 'P': 'q4', 'N': 'q6'},
+                    'q4': {'C': 'q4', 'P': 'q4', 'N': 'q4'},
+                    'q5': {'C': 'q5', 'P': 'q5', 'N': 'q5'},
+                    'q6': {'C': 'q6', 'P': 'q6', 'N': 'q6'}
+                },
+                initial_state='q0',
+                final_states={'q4', 'q5', 'q6'}
+            )
+
 OPCIONES = ("piedra", "papel", "tijera")
 REGLAS = {
     ("piedra", "tijera"): "ganaste",
@@ -23,7 +39,6 @@ def init_sesion():
 @app.route("/", methods=["GET", "POST"])
 def juego():
     init_sesion()
-
     if request.method == "POST":
         eleccion = request.form.get("eleccion", "").lower()
         if eleccion not in OPCIONES:
@@ -31,10 +46,11 @@ def juego():
             return redirect(url_for("juego"))
 
         comp = secrets.choice(OPCIONES)
-
+        
         if eleccion == comp:
             session["empates"] += 1
             resultado = "empate"
+            
         elif (eleccion, comp) in REGLAS:
             session["ganadas"] += 1
             resultado = "ganaste"
@@ -44,22 +60,7 @@ def juego():
 
         session["msj"] = f"Elegiste {eleccion} y la compu {comp}: {resultado}."
 
-        dfa1 = DFA(
-            states={'q0','q1','q2','q3','q4','q5','q6'},
-            input_symbols={'C', 'P', 'N'},
-            transitions={
-                'q0' : {'C' : 'q1', 'P' : 'q2', 'N' : 'q3'},
-                'q1' : {'C' : 'q6', 'P' : 'q5', 'N' : 'q4'},
-                'q2' : {'C' : 'q4', 'P' : 'q6', 'N' : 'q5'},
-                'q3' : {'C' : 'q5', 'P' : 'q4', 'N' : 'q6'}
-            },
-            initial_state='q0',
-            final_states={'q4', 'q5', 'q6'}
-        )
-        params = dfa1.input_parameters
-        params['final_states'] = {'q2'}
-        dfa2 = DFA(**params)
-
+        
     return render_template(
         "index.html",
         msj=session["msj"],
