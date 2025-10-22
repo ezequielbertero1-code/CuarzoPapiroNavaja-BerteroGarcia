@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, session, redirect, url_for
+from automata.fa.dfa import DFA
 import os , secrets  # para elegir aleatorio de forma segura
 
 app = Flask(__name__)
@@ -42,6 +43,22 @@ def juego():
             resultado = "perdiste"
 
         session["msj"] = f"Elegiste {eleccion} y la compu {comp}: {resultado}."
+
+        dfa1 = DFA(
+            states={'q0','q1','q2','q3','q4','q5','q6'},
+            input_symbols={'C', 'P', 'N'},
+            transitions={
+                'q0' : {'C' : 'q1', 'P' : 'q2', 'N' : 'q3'},
+                'q1' : {'C' : 'q6', 'P' : 'q5', 'N' : 'q4'},
+                'q2' : {'C' : 'q4', 'P' : 'q6', 'N' : 'q5'},
+                'q3' : {'C' : 'q5', 'P' : 'q4', 'N' : 'q6'}
+            },
+            initial_state='q0',
+            final_states={'q4', 'q5', 'q6'}
+        )
+        params = dfa1.input_parameters
+        params['final_states'] = {'q2'}
+        dfa2 = DFA(**params)
 
     return render_template(
         "index.html",
