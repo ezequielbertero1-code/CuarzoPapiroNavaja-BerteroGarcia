@@ -34,7 +34,7 @@ def init_sesion():
     session.setdefault("ganadas", 0)
     session.setdefault("perdidas", 0)
     session.setdefault("empates", 0)
-    session.setdefault("msj", "Jugá al famoso Piedra, Papel o Tijera.")
+    session.setdefault("msj", "Jugá al famoso Cuarzo, Papiro o Navaja.")
 
 @app.route("/", methods=["GET", "POST"])
 def juego():
@@ -42,7 +42,7 @@ def juego():
     if request.method == "POST":
         eleccion = request.form.get("eleccion", "")
         if eleccion not in OPCIONES:
-            session["msj"] = "Elección inválida. Probá con piedra, papel o tijera."
+            session["msj"] = "Elección inválida. Probá con Cuarzo, Papiro o Navaja."
             return redirect(url_for("juego"))
 
         comp = secrets.choice(OPCIONES)
@@ -58,7 +58,7 @@ def juego():
             session["perdidas"] += 1
             resultado = "Perdiste!"
 
-        session["msj"] = f"Elegiste {EMOJIS[eleccion]} y la compu {EMOJIS[comp]}: {resultado}."
+        session["msj"] = f"Elegiste {EMOJIS[eleccion]} y la maquina {EMOJIS[comp]}: {resultado}."
 
         
     return render_template(

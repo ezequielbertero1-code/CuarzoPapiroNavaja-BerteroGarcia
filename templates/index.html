@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Piedra • Papel • Tijera 🪨📄✂️</title>
+  <title>Cuarzo • Papiro • Navaja 🪨📄✂️</title>
   <style>
     :root { color-scheme: dark; }
     body {
@@ -59,17 +59,17 @@
     {% if not juego_terminado %}
       <!-- OJO: method y action correctos -->
       <form method="POST" action="/">
-        <button type="submit" name="eleccion" value="C" aria-label="Elegir piedra">
+        <button type="submit" name="eleccion" value="C" aria-label="Elegir Cuarzo">
           <span>🪨</span>
-          Piedra
+          Cuarzo
         </button>
-        <button type="submit" name="eleccion" value="P" aria-label="Elegir papel">
+        <button type="submit" name="eleccion" value="P" aria-label="Elegir Papiro">
           <span>📄</span>
-          Papel
+          Papiro
         </button>
-        <button type="submit" name="eleccion" value="N" aria-label="Elegir tijera">
+        <button type="submit" name="eleccion" value="N" aria-label="Elegir Navaja">
           <span>✂️</span>
-          Tijera
+          Navaja
         </button>
       </form>
     {% endif %}
