@@ -2,8 +2,9 @@
 <h1 align="center">CUARZO🪨 ⦁ PAPIRO📄 ⦁ NAVAJA✂️</h1>
 <h2 align="center">El juego de Piedra Papel y Tijera utilizando automatas!</h2>
 Pequeño proyecto realizado en Python, Flask y Docker para la materia Fundamentos Teoricos de la Informatica.
-<p align="center">![Cuarzo Papiro Navaja](static/showmas.webp)</p>
-
+<p align="center">
+  <img src="static/showmas.webp" alt="Cuarzo Papiro Navaja">
+</p>
 =================================================================================
 <h1>REQUERIMIENTOS</h1>
   ⦁ Alguna terminal para correr comandos. (PowerShell, Git bash, etc.)
