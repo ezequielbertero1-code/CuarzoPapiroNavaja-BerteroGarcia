@@ -7,7 +7,6 @@
 <p align="center">
   <img src="static/showmas.webp" alt="Cuarzo Papiro Navaja">
 </p>
-<br><br>
 
 ---
 
@@ -28,6 +27,6 @@
 
 ---
 
-Autores:
+Autores:<br>
 ⦁ Bertero Gianfranco Ezequiel.<br>
 ⦁ Garcia Gonzalez Franco Maximiliano.<br>
