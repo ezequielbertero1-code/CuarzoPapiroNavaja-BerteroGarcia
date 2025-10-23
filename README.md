@@ -12,22 +12,22 @@
 ---
 
 ## REQUERIMIENTOS
-⦁ Alguna terminal para correr comandos. (PowerShell, Git bash, etc.)
-⦁ Algun navegador web.
-⦁ Docker desktop instalado.
+⦁ Alguna terminal para correr comandos. (PowerShell, Git bash, etc.)<br>
+⦁ Algun navegador web.<br>
+⦁ Docker desktop instalado.<br>
 
 ---
 
 ## INSTALACION
-⦁ Clonar este repositorio en una carpeta en su dispositivo.
-⦁ En la carpeta creada del repositorio, correr una terminal de comandos.
-⦁ Abrir Docker Desktop o correr Docker.
-⦁ Pegar el siguiente comando: `docker compose --profile dev up -d --build`
-⦁ Abrir su navegador de confianza e ir a la url: localhost:5000
-⦁ Juegue al Cuarzo Papiro Navaja.
+⦁ Clonar este repositorio en una carpeta en su dispositivo.<br>
+⦁ En la carpeta creada del repositorio, correr una terminal de comandos.<br>
+⦁ Abrir Docker Desktop o correr Docker.<br>
+⦁ Pegar el siguiente comando: `docker compose --profile dev up -d --build`<br>
+⦁ Abrir su navegador de confianza e ir a la url: localhost:5000<br>
+⦁ Juegue al Cuarzo Papiro Navaja.<br>
 
 ---
 
 Autores:
-⦁ Bertero Gianfranco Ezequiel.
-⦁ Garcia Gonzalez Franco Maximiliano.
+⦁ Bertero Gianfranco Ezequiel.<br>
+⦁ Garcia Gonzalez Franco Maximiliano.<br>
