@@ -3,7 +3,7 @@
 <h2 align="center">El juego de Piedra Papel y Tijera utilizando automatas!</h2>
 Pequeño proyecto realizado en Python, Flask y Docker para la materia Fundamentos Teoricos de la Informatica.
 <p align="center">
-  ![Cuarzo Papiro Navaja](static/showmas.webp)
+![Cuarzo Papiro Navaja](static/showmas.webp)
 </p>
 
 =================================================================================
